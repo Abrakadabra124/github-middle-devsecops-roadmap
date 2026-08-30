@@ -23,9 +23,14 @@ function Enable-WindowsFeature {
 Enable-WindowsFeature -FeatureName "Microsoft-Windows-Subsystem-Linux"
 Enable-WindowsFeature -FeatureName "VirtualMachinePlatform"
 
-winget install --id Docker.DockerDesktop --exact --source winget --silent --accept-package-agreements --accept-source-agreements --disable-interactivity
-if ($LASTEXITCODE -ne 0) {
-    throw "Docker Desktop installation failed with exit code $LASTEXITCODE"
+$dockerPackage = winget list --id Docker.DockerDesktop --exact --source winget --accept-source-agreements | Out-String
+if ($dockerPackage -notmatch [regex]::Escape("Docker.DockerDesktop")) {
+    winget install --id Docker.DockerDesktop --exact --source winget --silent --accept-package-agreements --accept-source-agreements --disable-interactivity
+    if ($LASTEXITCODE -ne 0) {
+        throw "Docker Desktop installation failed with exit code $LASTEXITCODE"
+    }
+} else {
+    Write-Output "Docker Desktop is already installed."
 }
 
 wsl.exe --install --distribution Ubuntu --no-launch --web-download
