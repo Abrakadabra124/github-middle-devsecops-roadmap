@@ -39,18 +39,16 @@ $wslRows
 $installedDistributions = @(& wsl.exe --list --quiet 2>&1) -replace "`0", ""
 if ($installedDistributions -contains "Ubuntu") {
     Write-Output "UBUNTU TOOLCHAIN"
-    $linuxCheck = @'
-set +e
-for command_name in ansible ansible-lint mvn python3 shellcheck; do
-    if command -v "$command_name" >/dev/null 2>&1; then
-        printf 'PRESENT %s\n' "$command_name"
-        "$command_name" --version 2>&1 | head -n 3
-    else
-        printf 'MISSING %s\n' "$command_name"
-    fi
-done
-'@
-    & wsl.exe -d Ubuntu -- bash -lc $linuxCheck
+    foreach ($linuxTool in @("ansible", "ansible-lint", "mvn", "python3", "shellcheck")) {
+        & wsl.exe -d Ubuntu -- which $linuxTool 2>&1 | Out-Null
+        if ($LASTEXITCODE -ne 0) {
+            Write-Output "MISSING $linuxTool"
+            continue
+        }
+
+        Write-Output "PRESENT $linuxTool"
+        & wsl.exe -d Ubuntu -- $linuxTool --version 2>&1 | Select-Object -First 3
+    }
 } else {
     Write-Output "MISSING Ubuntu"
 }
