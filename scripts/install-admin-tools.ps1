@@ -33,9 +33,14 @@ if ($dockerPackage -notmatch [regex]::Escape("Docker.DockerDesktop")) {
     Write-Output "Docker Desktop is already installed."
 }
 
-wsl.exe --install --distribution Ubuntu --no-launch --web-download
-if ($LASTEXITCODE -ne 0) {
-    Write-Warning "Ubuntu installation returned exit code $LASTEXITCODE. Restart Windows and run this script again."
+$installedDistributions = @(& wsl.exe --list --quiet) -replace "`0", ""
+if ($installedDistributions -contains "Ubuntu") {
+    Write-Output "Ubuntu is already installed."
+} else {
+    wsl.exe --install --distribution Ubuntu
+    if ($LASTEXITCODE -ne 0) {
+        Write-Warning "Ubuntu installation returned exit code $LASTEXITCODE. Restart Windows and run this script again."
+    }
 }
 
 Stop-Transcript

@@ -33,7 +33,27 @@ Write-Output "DOCKER DAEMON"
 docker info --format "{{.ServerVersion}}" 2>&1
 
 Write-Output "WSL DISTRIBUTIONS"
-wsl.exe --list --verbose 2>&1
+$wslRows = @(& wsl.exe --list --verbose 2>&1) -replace "`0", ""
+$wslRows
+
+$installedDistributions = @(& wsl.exe --list --quiet 2>&1) -replace "`0", ""
+if ($installedDistributions -contains "Ubuntu") {
+    Write-Output "UBUNTU TOOLCHAIN"
+    $linuxCheck = @'
+set +e
+for command_name in ansible ansible-lint mvn python3 shellcheck; do
+    if command -v "$command_name" >/dev/null 2>&1; then
+        printf 'PRESENT %s\n' "$command_name"
+        "$command_name" --version 2>&1 | head -n 3
+    else
+        printf 'MISSING %s\n' "$command_name"
+    fi
+done
+'@
+    & wsl.exe -d Ubuntu -- bash -lc $linuxCheck
+} else {
+    Write-Output "MISSING Ubuntu"
+}
 
 if ($missingTools.Count -gt 0) {
     throw "Missing tools: $($missingTools -join ', ')"
