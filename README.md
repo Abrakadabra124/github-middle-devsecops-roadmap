@@ -25,6 +25,32 @@
 - [Шаблон README проекта](templates/PROJECT_README_TEMPLATE.md)
 - [Чек-лист готовности к интервью](templates/INTERVIEW_SCORECARD.md)
 
+## Быстрый старт окружения
+
+Обычный PowerShell без прав администратора:
+
+```powershell
+.\scripts\install-user-tools.ps1
+```
+
+PowerShell с правами администратора:
+
+```powershell
+.\scripts\install-admin-tools.ps1
+```
+
+После первого запуска Ubuntu в WSL:
+
+```bash
+bash /mnt/c/Users/Abrakadabra124/Documents/ChatGPT/Github\ middle\ devsecops/scripts/bootstrap-ubuntu.sh
+```
+
+Проверка Windows-части окружения:
+
+```powershell
+.\scripts\verify-environment.ps1
+```
+
 ## Принцип выполнения
 
 Каждую неделю нужно оставлять проверяемый результат: рабочий код, CI-проверку, архитектурное решение, сценарий отказа и обновлённую документацию.
