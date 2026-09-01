@@ -24,6 +24,8 @@
 - [Архитектура GitHub-портфолио](docs/portfolio-architecture.md)
 - [Шаблон README проекта](templates/PROJECT_README_TEMPLATE.md)
 - [Чек-лист готовности к интервью](templates/INTERVIEW_SCORECARD.md)
+- [Стандарт репозитория и branch protection](docs/repository-standard.md)
+- [Аудит завершения недели 1](docs/week1-completion-audit.md)
 
 ## Быстрый старт окружения
 
