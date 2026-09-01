@@ -1,0 +1,27 @@
+name: Portfolio feature
+description: Plan a verifiable DevSecOps portfolio change
+title: "[Feature]: "
+labels:
+  - enhancement
+body:
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Outcome
+      description: What observable result should exist?
+    validations:
+      required: true
+  - type: textarea
+    id: security
+    attributes:
+      label: Security and failure cases
+      description: Which trust boundaries, negative paths and recovery steps matter?
+    validations:
+      required: true
+  - type: textarea
+    id: done
+    attributes:
+      label: Definition of Done
+      description: List the tests, documentation, demo and release evidence required.
+    validations:
+      required: true
