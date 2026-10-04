@@ -1,6 +1,16 @@
-# GitHub Middle DevSecOps Roadmap
+# DevSecOps: безопасная поставка с проверяемыми результатами
 
-Практический план на 24 недели для GitHub-портфолио уровня **Middle DevSecOps** с ориентацией на требования HR и технических интервьюеров SberTech/Sber.
+С 2026-10-04 основной проект строится от конечного результата, исследования официальных практик и измеримой приёмки. Формулировки «уровень Middle/Senior» не являются критериями качества кода. Старый 24-недельный план сохранён как история обучения, а не актуальный контракт реализации.
+
+Текущая цель: воспроизводимая Secure Delivery Platform, которая блокирует небезопасные изменения, развёртывает доверенные артефакты, изолирует команды и позволяет проверить наблюдаемость, откат и восстановление.
+
+Основной проект: [Secure Delivery Platform](https://github.com/Abrakadabra124/enterprise-devsecops-platform). Канонические документы: [цель](https://github.com/Abrakadabra124/enterprise-devsecops-platform/blob/main/GOAL.md), [критерии Q01-Q10](https://github.com/Abrakadabra124/enterprise-devsecops-platform/blob/main/CONSTRAINTS.md), [исследование](https://github.com/Abrakadabra124/enterprise-devsecops-platform/blob/main/docs/research/best-practices.md), [план](https://github.com/Abrakadabra124/enterprise-devsecops-platform/blob/main/tasks/plan.md).
+
+Порядок: цель -> исследование и baseline -> план с результатами/метриками -> выполнение через режим цели -> повторная проверка. Не считать работающий локальный стенд доказательством production HA, соответствия стандарту целиком или профессионального грейда.
+
+Полная локальная приёмка Q01-Q10 прошла 2026-10-04: signed Flux/SOPS delivery, admission/network denial, нагрузка, rollback и независимое восстановление PostgreSQL. [Публичная сводка](https://github.com/Abrakadabra124/enterprise-devsecops-platform/blob/main/docs/evidence/acceptance-2026-10-04.json), [архитектура](https://github.com/Abrakadabra124/enterprise-devsecops-platform/blob/main/docs/architecture.md), [запуск и приёмка](https://github.com/Abrakadabra124/enterprise-devsecops-platform/blob/main/docs/runbooks/local-platform.md). Метрики относятся к конкретному проверенному снимку, а не автоматически к любому следующему commit. Raw evidence и credentials не публикуются.
+
+## Исторический план
 
 Период плана: **31 августа 2026 — 14 февраля 2027**. Базовая нагрузка: **12–15 часов в неделю**.
 
